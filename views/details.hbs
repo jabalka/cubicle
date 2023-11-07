@@ -1,0 +1,15 @@
+    {{! #with changes the place from where to search for the params }}
+      {{#with cube}}
+      {{! if not for #with it would be cube.name., cube.imageUrl etc}}
+      <h1>{{name}}</h1>
+      <img class="cube" src="{{imageUrl}}">
+      <div class="details">
+        <p><span>Description:</span> {{description}}</p>
+        <p><span>Difficulty level:</span> {{difficulty}}</p>
+        <a class="btn" href="/">Back</a>
+        <a class="btn" href="/edit/{{id}}">Edit</a>
+      </div>
+      {{/with}}
+
+
+
