@@ -22,7 +22,7 @@ module.exports = {
         };
         try{
             await req.storage.edit(req.params.id, cube);
-            res.redirect("/");
+            res.redirect("/details/" + req.params.id);
         } catch(err) {
             // error occurs when trying to render the page as the cube can not be shown
             if(err.name == 'ValidationError'){
