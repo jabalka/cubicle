@@ -24,7 +24,7 @@ module.exports = {
             await req.storage.edit(req.params.id, cube);
             res.redirect("/");
         } catch(err) {
-            // error occurs when trying toi render the page as the cube can not be shown
+            // error occurs when trying to render the page as the cube can not be shown
             if(err.name == 'ValidationError'){
                 const ctx = {
                     title: 'Edit Cube',
@@ -35,7 +35,7 @@ module.exports = {
                 // return res.redirect('edit/'+ req.params.id);
             };
         }
-
+        //         const cubeId = req.params.cubeId
 
     },
 };
