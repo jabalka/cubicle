@@ -105,6 +105,12 @@ button, main a.btn {
     color: white;
 }
 
+main a.btn:hover {
+    background-color: #0B2133;
+    color: white;
+    cursor: pointer;
+}
+
 button:hover {
     background-color: #0B2133;
     color: white;
