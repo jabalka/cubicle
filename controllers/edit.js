@@ -24,8 +24,18 @@ module.exports = {
             await req.storage.edit(req.params.id, cube);
             res.redirect("/");
         } catch(err) {
-            res.redirect('404');
+            // error occurs when trying toi render the page as the cube can not be shown
+            if(err.name == 'ValidationError'){
+                const ctx = {
+                    title: 'Edit Cube',
+                    error: 'All fields are required! Image URL must be a valid URL',
+                    cube
+                };
+                res.render('edit', {... ctx, id: req.params.id});
+                // return res.redirect('edit/'+ req.params.id);
+            };
         }
+
 
     },
 };
