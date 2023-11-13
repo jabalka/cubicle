@@ -1,6 +1,6 @@
       <h1>Edit</h1>
       <div class="form">
-        <form action="/edit/{{cube._id}}" method="POST">
+        <form action="/products/edit/{{cube._id}}" method="POST">
         {{#if error}}
         <p style="color: red;">{{error}}</p>
         {{/if}}
@@ -20,6 +20,6 @@
             <option value="6" {{#if cube.select6}}selected{{/if}}>6 - Hardcore</option>
           </select>
           <input type="submit" value="Save">
-                  <a class="btn" href="/details/{{cube._id}}">Back</a>
+                  <a class="btn" href="/products/details/{{cube._id}}">Back</a>
         </form>
       </div>

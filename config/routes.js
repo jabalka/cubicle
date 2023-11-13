@@ -1,28 +1,15 @@
-const { catalog } = require("../controllers/catalog");
-const { about } = require("../controllers/about.js");
-const { details, attach, attachPost } = require("../controllers/details.js");
-const { create, post: createPost } = require("../controllers/create.js");
-const { edit, post: editPost } = require("../controllers/edit");
 const { post: commentPost } = require("../controllers/comments.js");
-const { notFound } = require("../controllers/notFound.js");
-const { createAccessory, accessoryPost } = require("../controllers/accessory.js");
+
+const productController = require('../controllers/productController.js');
+const accessoryController = require('../controllers/accessoryController.js');
+const homeController = require('../controllers/homeController.js');
 
 module.exports = (app) => {
-    app.get("/", catalog);
-    app.get("/about", about);
-    app.get("/details/:id", details);
-    app.get("/create", create);
-    app.post("/create", createPost);
 
-    app.get("/edit/:id", edit);
-    app.post("/edit/:id", editPost);
+    app.use('/products', productController);
+    app.use('/accessory', accessoryController);
 
     app.post("/comments/:cubeId/create", commentPost);
 
-    app.get("/accessory/create", createAccessory);
-    app.post("/accessory/create", accessoryPost);
-    app.get("/details/:id/attach", attach);
-    app.post("/details/:cubeId/attach", attachPost);
-
-    app.all("*", notFound);
+    app.use('/', homeController);
 };
