@@ -58,6 +58,35 @@ router.get('/details/:id', preloadCube(), async (req, res) => {
     }
 });
 
+router.get('/delete/:id', preloadCube(), isOwner(), async (req, res) => {
+    const cube = req.data.cube;
+    if(!cube){
+        res.redirect("/404");
+    } else {
+        cube[`select${cube.difficulty}`] = true;
+        const ctx = {
+            title: "Delete Cube",
+            cube,
+        };
+        res.render("deleteCube", ctx);
+    }
+})
+
+router.post('/delete/:id', preloadCube(), isOwner(), async (req, res) => {
+    const cube = req.data.cube;
+    if(!cube){
+        res.redirect("/404");
+    } else {
+        try{
+            await req.storage.deleteCube(cube)
+            res.redirect('/products');
+        } catch (err){
+                return res.render('deleteCube', {title: 'Delete Cube', error: 'All fields are required! Image URL must be a valid URL'});
+            
+        }
+    }
+})
+
 router.get('/edit/:id', preloadCube(), isOwner(), async (req, res) => {
     const cube = req.data.cube;
     

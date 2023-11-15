@@ -70,6 +70,15 @@ async function edit(id, cube) {
     return existing.save();
 }
 
+async function deleteCube(cube){
+    try{
+        await Cube.deleteOne({_id: cube._id});
+    }catch(err){
+        throw new Error('error with deleting cube');
+    }
+    
+}
+
 async function createComment(cubeId, comment) {
     const cube = await Cube.findById(cubeId);
 
@@ -83,7 +92,6 @@ async function createComment(cubeId, comment) {
     cube.comments.push(newComment);
     await cube.save();
 }
-
 
 async function attachSticker(cubeId, stickerId) {
     const cube = await Cube.findById(cubeId);
@@ -103,4 +111,5 @@ module.exports = {
     edit,
     createComment,
     attachSticker,
+    deleteCube
 };
