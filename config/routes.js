@@ -12,7 +12,7 @@ module.exports = (app) => {
     app.use('/accessory', accessoryController);
     app.use('/auth', authController);
 
-    app.post("/comments/:cubeId/create", isAuthAuth(), commentPost);
+    app.post("/comments/:cubeId/create", isAuth(), commentPost);
 
     app.use('/', homeController);
 };
