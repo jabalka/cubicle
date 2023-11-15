@@ -8,6 +8,7 @@ module.exports = () => (req, res, next) => {
     req.auth = {
         register,
         login,
+        logout
     };
     
     if(readToken(req)){
@@ -40,6 +41,10 @@ module.exports = () => (req, res, next) => {
                 req.user = createToken(user);
             }
         }
+    }
+
+    async function logout(){
+        res.clearCookie(COOKIE_NAME);
     }
 
     function createToken(user){
