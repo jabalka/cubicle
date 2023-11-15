@@ -56,6 +56,8 @@ module.exports = () => (req, res, next) => {
             try{
                 const userData = jwt.verify(token, TOKEN_SECRET);
                 req.user = userData;
+// --------------- locals = magig variable that handleBars reads it
+                res.locals.user = userData
             } catch (err){
                 res.clearCookie(COOKIE_NAME);
                 res.redirect('/auth/login');
