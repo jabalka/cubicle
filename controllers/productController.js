@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { isGuest, isAuth } = require('../middlewares/gueards');
 
 const router = Router();
 
@@ -16,11 +17,11 @@ router.get('/', async (req, res) => {
     res.render("index", ctx);
 });
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuth(), (req, res) => {
     res.render('create', {title: 'Create Cube'});
 });
 
-router.post('/create', async (req, res)  => {
+router.post('/create', isAuth(), async (req, res)  => {
     const cube = {
         name: req.body.name,
         description: req.body.description,
