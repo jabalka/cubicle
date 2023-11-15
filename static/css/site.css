@@ -292,3 +292,8 @@ footer {
     display: none;
     padding: 10px;
 }
+
+div.details:nth-child(6) > article:nth-child(2) > header:nth-child(1){
+    text-align: left;
+    color: white;
+}

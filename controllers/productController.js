@@ -47,7 +47,8 @@ router.get('/details/:id', preloadCube(), async (req, res) => {
     if(cube == undefined){
         res.redirect('/404');
     } else {
-        cube.isOwner = req.user._id && (cube.authorId == req.user._id);
+        cube.isOwner = req.user && (cube.authorId == req.user._id);
+        cube.isUser = req.user;
 
         const ctx = {
             title: 'Cubicle',
