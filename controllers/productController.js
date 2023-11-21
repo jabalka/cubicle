@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { isGuest, isAuth, isOwner } = require('../middlewares/gueards');
 const { preloadCube } = require('../middlewares/preload');
+const { parseMongooseError } = require('../util/parse');
 
 const router = Router();
 
@@ -33,12 +34,20 @@ router.post('/create', isAuth(), async (req, res)  => {
 
     try{
         await req.storage.create(cube);
+        res.redirect('/');
     } catch(err){
-        if(err.name == 'ValidationError'){
-            return res.render('create', {title: 'Create Cube', error: 'All fields are required! Image URL must be a valid URL'});
+        cube[`select${cube.difficulty}`] = true;
+        const ctx = {
+            title: 'Create Cube',
+            cube
         }
+        if(err.name == 'ValidationError'){
+            ctx.errors = parseMongooseError(err);
+        } else {
+            ctx.errors = [err.message]
+        }
+        res.render('create', ctx);
     }
-    res.redirect('/');
 });
 
 router.get('/details/:id', preloadCube(), async (req, res) => {

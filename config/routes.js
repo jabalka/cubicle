@@ -15,4 +15,12 @@ module.exports = (app) => {
     app.post("/comments/:cubeId/create", isAuth(), commentPost);
 
     app.use('/', homeController);
+    // catches only synchornised errors!!!
+// if there are 4 params then the error always is the first param
+// since the error pass all the other middlewares it can be catched lastly here
+    app.use((err, req, res, next) => {
+        console.log('-------',err.message);
+
+        res.status(500).send('Somehing happened!');
+    });
 };
